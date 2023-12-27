@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const HttpError = require('./models/http-error');
+require('dotenv').config();
+
 
 const app = express();
 
@@ -20,10 +22,11 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
+
+const mongoURL = process.env.REACT_APP_API_MONGOURL;
+
 mongoose
-  .connect(
-    'mongodb+srv://lang-456:UOGsFYxBReHkYdKA@cluster0.n0nv6tj.mongodb.net/language?retryWrites=true&w=majority'
-  )
+  .connect(mongoURL)
   .then(() => {
     app.listen(5000);
   })
