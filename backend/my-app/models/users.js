@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+// const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +11,7 @@ const userSchema = new Schema({
     true, ref: 'Translation'}],  
 })
 
-userSchema.plugin(uniqueValidator);
+// userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema);
+
