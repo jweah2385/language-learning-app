@@ -1,6 +1,5 @@
 
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +10,5 @@ const advanceCardSchema = new Schema({
   spanishAudio: { type: String, required: true },
 });
 
-advanceCardSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('advanceCard', advanceCardSchema);

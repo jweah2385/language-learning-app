@@ -1,6 +1,6 @@
-const { text } = require('body-parser');
+
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+// const uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +11,6 @@ const simpleCardSchema = new Schema({
   spanishAudio: { type: String, required: true}
 });
 
-simpleCardSchema.plugin(uniqueValidator);
+
 
 module.exports = mongoose.model('SimpleCard', simpleCardSchema);
