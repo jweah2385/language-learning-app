@@ -2,9 +2,42 @@ const HttpError = require('../models/http-error');
 const simpleCard = require('../models/simpleCard');
 const { default: mongoose } = require('mongoose');
 
-const getSimpleCards = async (req, res, next) => {}
+const getSimpleCards = async (req, res, next) => {
+    let cards;
+    try {
+        cards = simpleCard.find({});
+    } catch (err) {
+        const error = new HttpError(
+            'Fetching cards failed, please try again later.', 500
+        );
+        return next(error);
+    }
+    res.json({simpleCards: (await cards).map(cards => cards.toObject({ getters: true}))});
+}
 
-const getSimpleCardsById = async (req, res, next) => {}
+const getSimpleCardsById = async (req, res, next) => {
+    const simpleCardId = req.params.cid;
+    
+    let card;
+    try {
+        card = await simpleCard.findById(simpleCardId);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong could not find card.', 500
+        );
+        return next(error);
+    }
+
+    if (!card) {
+        const error = new HttpError(
+            'Could not find a card with the provided id.',
+            404
+        );
+        return next(error);
+    }
+
+    res.json({ simpleCard: card.toObject({ getters: true })});
+}
 
 const createSimpleCard = async (req, res, next) => {
     const { englishText, englishAudio, spanishText, spanishAudio
@@ -47,7 +80,8 @@ const createSimpleCard = async (req, res, next) => {
 
 }
 
-const deleteSimpleCard = async (req, res, next) => {}
+const deleteSimpleCard = async (req, res, next) => {
+}
 
 exports.getSimpleCards = getSimpleCards;
 exports.getSimpleCardsById = getSimpleCardsById;

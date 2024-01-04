@@ -7,6 +7,8 @@ require('dotenv').config();
 const usersRoutes = require('./routes/users-route');
 const translationsRoutes = require('./routes/translations-route');
 const simpleCardsRoutes = require('./routes/simple-cards-route');
+const mediumCardsRoutes = require('./routes/medium-cards-route');
+const advanceCardsRoutes = require('./routes/advance-cards-route');
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
 app.use('/api/users/', usersRoutes);
 app.use('/api/translations', translationsRoutes)
 app.use('/api/simpleCards', simpleCardsRoutes);
+app.use('/api/mediumCards', mediumCardsRoutes );
+app.use('/api/advanceCards', advanceCardsRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
